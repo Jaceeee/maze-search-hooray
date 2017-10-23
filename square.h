@@ -24,7 +24,7 @@ private:
 	int cumulativeCost; // g - score
 	int heuristic;		// h - score
 	int fScore;
-	Square *parent;
+	map<int,Square*> parentSpecificGoal;
 public:
 	Square() {
 		row = 0;
@@ -53,15 +53,15 @@ public:
 		heuristic = fScore = 0;
 	}
 
-	~Square() {
-		parent = NULL;
-		delete parent;
-	}
+	// ~Square() {
+	// 	parent = NULL;
+	// 	delete parent;
+	// }
 
 	bool isPassable() { return (content == WALL) ? false : true; }
 
-	void setParent(Square *sq) { parent = sq; }
-	Square* getParent() { return parent; }
+	void setParent(int goalKey, Square *sq);
+	Square* getParent(int goalKey) { return parentSpecificGoal[goalKey]; }
 	bool isVisited() { return visited; } 
 
 	char getItem() { return content; }
@@ -70,6 +70,7 @@ public:
 	int getHeuristic() { return heuristic; }
 	int getCumulative() { return cumulativeCost; }
 	int getFScore() { return fScore; }
+	map<int,Square*> getParentMap() { return parentSpecificGoal; }
 
 	void setVisited() { visited = (!visited) ? true : false; }
 	void setVisited(bool arg) { visited = arg; }
@@ -100,6 +101,15 @@ public:
 void Square::setSquare(int h_val, int g_val) {
 	heuristic = h_val;
 	cumulativeCost = g_val;
+}
+
+void Square::setParent(int goalKey, Square* sq) {
+	map<int,Square*>::iterator it = parentSpecificGoal.find(goalKey);
+	if(it != parentSpecificGoal.end()) {
+		it->second = sq;
+	} else {
+		parentSpecificGoal.insert(pair<int,Square*>(goalKey, sq));	
+	}
 }
 
 void Square::setHeuristic(int type, int destX, int destY) {

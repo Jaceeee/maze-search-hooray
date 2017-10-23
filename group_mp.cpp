@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 #include <cmath>
 #include <limits>
 #include <algorithm>
