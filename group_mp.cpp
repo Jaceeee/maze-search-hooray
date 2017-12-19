@@ -10,8 +10,6 @@
 
 using namespace std;
 
-// TODO; FINISH
-
 int main() {
 	char fileName[100];	
 	int option;

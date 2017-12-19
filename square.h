@@ -16,13 +16,12 @@ class Square {
 private:
 	char content;
 
-	// position variables
 	int row;
 	int col;
 
 	bool visited;
-	int cumulativeCost; // g - score
-	int heuristic;		// h - score
+	int cumulativeCost;
+	int heuristic;
 	int fScore;
 	map<int,Square*> parentSpecificGoal;
 public:
@@ -43,7 +42,6 @@ public:
 		this->heuristic = sq.heuristic;
 	}
 
-	// set cumulativeCost of each square to infinity
 	Square(int row, int col,char item) {
 		this->row = row;
 		this->col = col;
@@ -52,11 +50,6 @@ public:
 		cumulativeCost = 100000000;
 		heuristic = fScore = 0;
 	}
-
-	// ~Square() {
-	// 	parent = NULL;
-	// 	delete parent;
-	// }
 
 	bool isPassable() { return (content == WALL) ? false : true; }
 
@@ -123,8 +116,6 @@ void Square::setHeuristic(int type, int destX, int destY) {
 		cout << "Heuristic type not valid. Resend arguments." << endl;
 	}
 }
-
-// produce heuristics
 
 int computeManhattanDistance(int srcX, int srcY, int destX, int destY) {
 	return abs(destX-srcX) + abs(destY-srcY);

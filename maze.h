@@ -24,10 +24,10 @@ public:
 		for(int i = 0, k = 0; i < length; i++) {
 			for(int j = 0; j < width; j++, k++) {
 				this->maze[i][j]=m.maze[i][j];
-				if(this->maze[i][j].getItem() == START) { //Jace changes
+				if(this->maze[i][j].getItem() == START) {
 					this->start = &this->maze[i][j];
 				}
-				else if(this->maze[i][j].getItem() == END) { //Jace changes
+				else if(this->maze[i][j].getItem() == END) {
 					this->end = &this->maze[i][j];
 				}
 			}
@@ -45,10 +45,10 @@ public:
 		for(int i = 0, k = 0; i < length; i++) {
 			for(int j = 0; j < width; j++, k++) {
 				this->maze[i][j]=Square(i,j,mazeInFile[k]);
-				if(this->maze[i][j].getItem() == START) { //Jace changes
+				if(this->maze[i][j].getItem() == START) {
 					this->start = &this->maze[i][j];					
 				}
-				else if(this->maze[i][j].getItem() == END) { //Jace changes
+				else if(this->maze[i][j].getItem() == END) {
 					this->end = &this->maze[i][j];					
 				}
 			}
@@ -68,8 +68,6 @@ public:
 		delete end;		
 	}
 
-	//Square getSquare(int x ,int y) { removeturn maze[x][y]; }
-	// void setPath(int,int);
 	Square* getSquare(int x ,int y) { return &maze[x][y]; }
 	Square* getStartingSquare() { return this->start; }
 	Square getEndSquare() { return *this->end; }
